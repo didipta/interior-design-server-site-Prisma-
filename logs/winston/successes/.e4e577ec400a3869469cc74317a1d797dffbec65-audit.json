@@ -1,0 +1,20 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "D:\\programming hero level-2\\Interior Design and Decor Service\\interior design server site(Prisma)\\logs\\winston\\successes\\.e4e577ec400a3869469cc74317a1d797dffbec65-audit.json",
+    "files": [
+        {
+            "date": 1697042796021,
+            "name": "D:\\programming hero level-2\\Interior Design and Decor Service\\interior design server site(Prisma)\\logs\\winston\\successes\\phu-2023-11-10-22-success.log",
+            "hash": "ebbd8b073b962a99ad9e5a2b53fd17747ed56b60153c0e9eeabda9c03ef4ef4f"
+        },
+        {
+            "date": 1697043652408,
+            "name": "D:\\programming hero level-2\\Interior Design and Decor Service\\interior design server site(Prisma)\\logs\\winston\\successes\\phu-2023-11-10-23-success.log",
+            "hash": "de752d257adf17371c64486bc8fb84cd77c0cb40a4649f0c7594fac12874a733"
+        }
+    ],
+    "hashType": "sha256"
+}
