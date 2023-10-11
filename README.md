@@ -1,69 +1,184 @@
-# University Management Core Service
-This guide will walk you through the process of setting up the University Management Core Service Starter project. By following these steps, you will clone the project, install dependencies, and configure Prisma for database management. Let's get started!
+# Service Booking and Management Website ( Full Stack)
 
+### Introduction
 
-## Installation Steps
-### Follow these steps to clone and set up starter project:
+Welcome to the Service Booking and Management Website assignment! In this project, you will be tasked with designing and building a comprehensive online platform that allows users to browse, book, and manage various services. The assignment is divided into three main parts: user-facing features, admin-facing features, and super admin-facing features. Below, you'll find a breakdown of the requirements for each of these categories.
 
-1. `Clone the project:` Open your terminal or command prompt and run the following command to clone the project repository:
+# Assignment Requirements:
 
-```bash
-git clone https://github.com/Programming-Hero-Next-Level-Development/interior design server site(Prisma)-starter.git interior design server site(Prisma)
-```
+### User-Facing Features
 
-2. `Navigate into the project directory:` Use the cd command to navigate into the project directory:
+### Registration and Login
 
-```bash
-cd interior design server site(Prisma)
-```
+- Your website should offer a user-friendly and secure registration process.
+- Implement proper validation to ensure data accuracy.
 
-3. `Install project dependencies:` Next, install the project dependencies by running the following command:
+### Service Search and Add to Cart
 
-```bash
-yarn install
-```
+- Create an intuitive interface for users to browse and search for services.
+- Allow users to add services to their cart for easy booking.
 
-4. Configure Prisma and the database connection:
+### Booking and Scheduling
 
-- Add Prisma as a development dependency by running the following command:
-```bash
-yarn add prisma --save-dev
-```
+- Develop a booking system that enables users to select service dates and times.
+- Ensure a smooth, step-by-step booking process with clear confirmation.
 
-- Set up your Prisma project by creating the Prisma schema file using the following command:
-```bash
-npx prisma init
-```
+### Profile Management
 
-- Open the prisma/schema.prisma file and configure your database connection details.
+- Design user profiles where users can manage personal information and preferences.
+- Enable users to view and edit their profiles.
 
-```bash
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
-```
+### Review and Rating System
 
-- Create a .env file in the project root directory and set the DATABASE_URL environment variable. Replace the placeholders with your database connection details:
-```bash
-DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE?schema=SCHEMA"
-```
+- Implement a system for users to leave reviews and ratings for services.
+- Display these reviews and ratings on service listings.
 
-5. Creating the database schema
-6. Migrate the database schema: Use the following command to create and apply the initial database schema:
+### Notifications (optional)
 
-```bash
-npx prisma migrate dev --name init
-```
-This command creates a new migration file based on your schema changes and applies it to your database.
+- Create a notifications center where users receive booking confirmations, reminders, and updates.
 
-6. `Install Prisma Client:` Install the Prisma Client library by running the following command:
-```bash
-yarn add @prisma/client
-```
+### Service History
 
-This command installs the Prisma Client, which provides an interface to interact with your database.
+- Develop a user dashboard to view booking history and check booking statuses.
+- Allow users to cancel bookings when necessary.
 
-That's it! You have successfully set up the University Management Core Service Starter project. You can now start exploring and working with the codebase. Refer to the project documentation or README for further instructions on how to run and use the core service.
+### Feedback Forms
 
-Happy coding!
+- Design feedback forms for users to submit comments and suggestions.
+
+### User Dashboard
+
+- Create a dashboard that provides an overview of booking order history and statuses.
+- Include options for canceling bookings.
+
+### Admin-Facing Features
+
+### Admin Dashboard
+
+- Develop a central dashboard for administrators to monitor and manage website activities.
+
+### User Management
+
+- Create a user management system for administrators to add, edit, and manage user accounts.
+- Implement role-based permissions.
+
+### Service Management
+
+- Design an interface for adding, editing, and removing service listings.
+- Include options for pricing, descriptions, and availability.
+
+### Booking Management
+
+- Implement a booking management system for administrators to view and manage booking requests.
+- Allow admins to accept, reject, and adjust schedules.
+
+### Content Management
+
+- Create a content management system for administrators to control website content, including blog posts and FAQs.
+
+### Profile Management
+
+- Allow admins to manage their profiles and access permissions.
+
+### Super Admin-Facing Features
+
+### Add Admin and Manage Admin
+
+- Develop a feature that allows super admins to add new admin users.
+- Provide options for managing admin roles.
+    
+    ### Profile Management
+    
+    - Create a profile management system for super admins to update their personal information.
+
+### Homepage Contents
+
+- Navbar
+- Header
+- Available Service
+- Upcoming Services
+- Events by Category
+- Survey/Overview
+- Client Review
+- Latest News
+- Footer
+- Two or more unique Sections
+
+### Functional Requirements
+
+### User Functional Requirements
+
+- Users should be able to register with a valid email address.
+- Implement password validation and security measures.
+- Users must log in to access their accounts.
+- Users can create and manage their profiles, including personal information and preferences.
+- Users should be able to view and edit their profiles easily.
+- Users can browse available services.
+- Implement a search feature allowing users to search services by name, location, and category.
+- Users should be able to filter services by price range and other relevant criteria.
+- Users can select services and choose available dates and times for booking(if applicable) .
+- Implement a smooth and user-friendly booking process with confirmation.
+- Users should be able to track the status of their bookings.
+- Users can leave reviews and ratings for services they have booked.
+- Reviews and ratings should be displayed on service listings.
+- Create a notifications center where users receive booking confirmations, reminders, and updates ( optional - readonly )
+- Develop a user dashboard displaying booking history and statuses.
+- Users should have the option to cancel bookings if necessary.
+- Design user-friendly feedback forms for users to submit comments and suggestions.
+
+### Admin Functional Requirements
+
+- Admins should have access to a centralized dashboard to monitor and manage website activities.
+- Admins can add, edit, and manage user accounts.
+- Admins should be able to add, edit, and remove service listings.
+- Provide options for pricing, descriptions, and availability management.
+- Implement a booking management system for administrators to view and manage booking requests.
+- Admins can accept, reject, or adjust schedules as needed.
+- Create a content management system for administrators to control website content, including blog posts and FAQs.
+- Allow administrators to manage their profiles.
+
+### Super Admin Functional Requirements
+
+- Super admins can add new admin users to the system.
+- Provide options for managing admin roles.
+- Create a profile management system for super admins to update their personal information.
+
+### Important Notes
+
+- You have the freedom to choose your preferred technology stack; however, it is mandatory to include either Next.js or Prisma alongside PostgreSQL in your project. You may opt to utilize both if your project's requirements necessitate it.
+- Implement robust data validation using appropriate libraries such as Zod, Joi, or equivalent.
+- Integrate a pagination system, filtering capabilities, and sorting functionality into your backend API to enhance the user experience, simplify navigation, and enable convenient access to pertinent data.
+- Prioritize proper error handling throughout your codebase.
+- Maintain coding best practices to ensure code quality and readability.
+- To prevent deployment issues on the backend, avoid using a logger & image upload( for multer only)  unless it is explicitly required for debugging or monitoring purposes.
+- Marks for enhancing the user experience of your project. Focus on enhancing usability, accessibility, and overall user satisfaction.
+
+### Examples of Services
+
+Choose one from the following list or propose other services for your project:
+
+1. Car Repairing service
+2. Photography
+3. Cleaning Service
+4. Mobile fix service
+5. Laundry Service
+6. Internet Service
+7. Painting Service
+8. Appliance Repair Service
+9. Home Renovation Service
+10. Tutoring Service
+11. Travel agency Service
+12. Event planning and management service
+13. Computer Repair and IT Services
+14. Interior Design and Decor Service
+15. Wedding Planning and Coordination Service
+
+### Assignment Submission
+
+Your final submission should include:
+
+- Source code (GitHub Repository link of frontend and backend)
+- Live site link
+- A recorded video providing an overview of your project within 2-5 minutes.
+
+**Note:** Must submit your complete website. Incomplete assignments will not be accepted.
