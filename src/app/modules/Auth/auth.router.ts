@@ -1,5 +1,7 @@
 import express from 'express';
+import validateRequest from '../../middlewares/validateRequest';
 import { authController } from './auth.controller';
+import { authValidation, authsignupValidation } from './authvalidation';
 
 const router = express.Router();
 
@@ -9,13 +11,10 @@ const router = express.Router();
 //   UserController.createUser
 // );
 
-router.post(
-  '/signin',
-  authController.signin
-);
+router.post('/signin', validateRequest(authValidation), authController.signin);
 router.post(
   '/signup',
-  
+  validateRequest(authsignupValidation),
   authController.signup
 );
 // router.post(

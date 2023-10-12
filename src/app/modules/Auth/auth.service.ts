@@ -27,6 +27,7 @@ const signup = async (data: User): Promise<IAuth> => {
     Number(config.bcrypt_salt as string)
   );
   data.password = passwordHash;
+  data.defaultpassword="1";
 
   const result = await prisma.user.create({
     data: {

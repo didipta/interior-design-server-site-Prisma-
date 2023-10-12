@@ -80,8 +80,8 @@ model booking{
   serviceprice Int
   serviceId String
   status status @default(pedding)
-  bookingdate String
-  bookingtime String
+  bookingdate DateTime
+  bookingtime DateTime?
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   @@map("booking")
@@ -93,7 +93,7 @@ model cart {
   userId String
   service service @relation(fields: [serviceId], references: [id])
   serviceId String
-  quantity Int
+  quantity Int?
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   @@map("cart")
@@ -127,7 +127,9 @@ model notification{
   user User @relation(fields: [userId], references: [id])
   userId String
   notification String
+  title String
   type notitype
+    status  Int @default(0)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   @@map("notification")
