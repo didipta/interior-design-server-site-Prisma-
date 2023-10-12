@@ -14,8 +14,15 @@ model User {
   id         String   @id @default(uuid())
   name       String
   role       role     @default(customer)
-  phonenumber String  @unique
+  email      String   @unique
+  defaultpassword String
   profile profiledetails?
+  booking booking[]
+  cart cart[]
+  review review[]
+  feedback feedback[]
+  notification notification[]
+
   password   String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
@@ -28,12 +35,113 @@ model profiledetails {
   id         String   @id @default(uuid())
   profileimg String
   address    String
-  email      String   @unique
+   phonenumber String  @unique
   user  User @relation(fields: [userId], references: [id])
   userId String  @unique
-  createdAt  DateTime @default(now())
+   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   @@map("profiledetails")
+}
+
+model servicecategory{
+  id        String   @id @default(uuid())
+  categoryname String
+  service service[]
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  @@map("servicecategory")
+}
+
+model service {
+  id         String   @id @default(uuid())
+  name String
+   img String
+  price Int
+  Available Int
+  status Int
+  slug String
+  description String
+  shortdescription String
+  servicecategory servicecategory @relation(fields: [servicecategoryId], references: [id])
+  servicecategoryId String
+  booking booking[]
+  cart cart[]
+  review review[]
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  @@map("service")
+}
+
+model booking{
+  id         String   @id @default(uuid())
+  user User @relation(fields: [userId], references: [id])
+  userId String
+  service service @relation(fields: [serviceId], references: [id])
+  serviceprice Int
+  serviceId String
+  status status @default(pedding)
+  bookingdate String
+  bookingtime String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  @@map("booking")
+}
+
+model cart {
+  id         String   @id @default(uuid())
+  user User @relation(fields: [userId], references: [id])
+  userId String
+  service service @relation(fields: [serviceId], references: [id])
+  serviceId String
+  quantity Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  @@map("cart")
+}
+
+model review {
+  id         String   @id @default(uuid())
+  user User @relation(fields: [userId], references: [id])
+  userId String
+  service service @relation(fields: [serviceId], references: [id])
+  serviceId String
+  review String
+  rating Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  @@map("review")
+}
+
+model feedback{
+  id         String   @id @default(uuid())
+  user User @relation(fields: [userId], references: [id])
+  userId String
+  feedback String
+  subject String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  @@map("feedback")
+}
+model notification{
+  id         String   @id @default(uuid())
+  user User @relation(fields: [userId], references: [id])
+  userId String
+  notification String
+  type notitype
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  @@map("notification")
+}
+
+model content{
+  id         String   @id @default(uuid())
+  title String
+  content String
+  type contenttype
+  slug String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  @@map("content")
 }
 
 
@@ -42,4 +150,22 @@ enum role {
   admin
   customer
 
+}
+enum status {
+  pedding
+  approved
+  rejected
+}
+enum notitype {
+  booking
+  feedback
+  review
+  cart
+}
+
+enum contenttype {
+blog
+faq
+aboutus
+contactus
 }
