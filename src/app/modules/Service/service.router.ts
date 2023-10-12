@@ -6,5 +6,8 @@ const router = express.Router();
 
 router.post('/', validateRequest(service), serviceController.createservice);
 router.get('/', serviceController.getservice);
+router.get('/:id', serviceController.getservicebyid);
+router.put('/:id', serviceController.updateservice);
+router.delete('/:id', serviceController.deleteservice);
 
 export const serviceRoute = router;

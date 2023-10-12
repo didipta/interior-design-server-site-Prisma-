@@ -102,7 +102,39 @@ const getservice = async (
     data: result,
   };
 };
+const getservicebyid = async (id: string): Promise<service | null> => {
+  const result = await prisma.service.findUnique({
+    where: {
+      id: id,
+    },
+  });
+  return result;
+};
+const updateservice = async (
+  id: string,
+  data: service
+): Promise<service | null> => {
+  const result = await prisma.service.update({
+    where: {
+      id: id,
+    },
+    data,
+  });
+  return result;
+};
+const deleteservice = async (id: string): Promise<service | null> => {
+  const result = await prisma.service.delete({
+    where: {
+      id: id,
+    },
+  });
+  return result;
+};
+
 export const serviceService = {
   createservice,
   getservice,
+  getservicebyid,
+  updateservice,
+  deleteservice,
 };
