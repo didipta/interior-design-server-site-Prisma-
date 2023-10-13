@@ -2,6 +2,7 @@ import express from 'express';
 import { AuthRoute } from '../modules/Auth/auth.router';
 import { bookingRoute } from '../modules/Booking/booking.router';
 import { serviceRoute } from '../modules/Service/service.router';
+import { cartRoute } from '../modules/cart/cart.router';
 import { notificationRoute } from '../modules/notification/notification.router';
 import { reviewRouter } from '../modules/review/review.router';
 import { servicecategoryRoute } from '../modules/servicecategory/servicecategory.router';
@@ -37,6 +38,10 @@ const moduleRoutes = [
   {
     path: '/review',
     route: reviewRouter,
+  },
+  {
+    path: '/cart',
+    route: cartRoute,
   },
 ];
 

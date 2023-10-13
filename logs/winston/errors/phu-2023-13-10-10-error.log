@@ -1,0 +1,31 @@
+Fri Oct 13 2023 10:52:49 } [PH] error: 
+Invalid `prisma.cart.create()` invocation:
+
+{
+  data: {
+    userId: "e17add0b-feb9-4d36-be43-d65e37be076f",
++   user: {
++     create: UserCreateWithoutCartInput | UserUncheckedCreateWithoutCartInput,
++     connectOrCreate: UserCreateOrConnectWithoutCartInput,
++     connect: UserWhereUniqueInput
++   }
+  }
+}
+
+Argument `user` is missing.
+Fri Oct 13 2023 10:54:50 } [PH] error: 
+Invalid `prisma.cart.create()` invocation:
+
+{
+  data: {
+    userId: "e17add0b-feb9-4d36-be43-d65e37be076f",
+    quantity: 1,
++   user: {
++     create: UserCreateWithoutCartInput | UserUncheckedCreateWithoutCartInput,
++     connectOrCreate: UserCreateOrConnectWithoutCartInput,
++     connect: UserWhereUniqueInput
++   }
+  }
+}
+
+Argument `user` is missing.
