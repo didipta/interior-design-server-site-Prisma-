@@ -1,6 +1,8 @@
 // import { AdminRole } from '../Admin/admin.interface';
 // import { IRole } from '../Users/User.interface';
 
+import { User } from '@prisma/client';
+
 export type ILoginUser = {
   email: string;
   password: string;
@@ -8,6 +10,7 @@ export type ILoginUser = {
 
 export type ILoginUserResponse = {
   accessToken: string;
+  isuserExist: User;
   // refreshToken?: string;
 };
 

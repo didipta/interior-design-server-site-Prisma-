@@ -6,9 +6,16 @@ import { authService } from './auth.service';
 
 const signin = catchAsync(async (req: Request, res: Response) => {
   const { ...loginData } = req.body;
-  const result = await authService.loginAdmin(loginData);
-  const { accessToken } = result;
+  const result = await authService.login(loginData);
+  const { accessToken, isuserExist } = result;
 
+  const { id, name, email, role } = isuserExist;
+  const user = {
+    id,
+    name,
+    email,
+    role,
+  };
   // const cookieOptions = {
   //   secure: config.env === 'production',
   //   httpOnly: true,
@@ -21,6 +28,7 @@ const signin = catchAsync(async (req: Request, res: Response) => {
     success: true,
     message: 'User signin successfully!',
     token: accessToken,
+    data: user,
   });
 });
 

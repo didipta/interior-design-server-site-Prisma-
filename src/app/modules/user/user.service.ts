@@ -1,150 +1,83 @@
-import { User } from '@prisma/client';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { profiledetails } from '@prisma/client';
 import prisma from '../../../shared/prisma';
-import { Iuser } from './user.interface';
 
-const insertIntoDB = async (data: User): Promise<Iuser> => {
-  const emailexit = await prisma.user.findUnique({
-    where: {
-      email: data.email,
-    },
-  });
-  if (emailexit) {
-    throw new Error('Email already exist');
-  }
-
-  //password file not show in response
-  const result = await prisma.user.create({
-    data,
-    select: {
-      id: true,
-      name: true,
-      email: true,
-      role: true,
-      contactNo: true,
-      address: true,
-      profileImg: true,
-      createdAt: true,
-      updatedAt: true,
-      reviews: true,
-      orders: true,
-    },
-  });
-  return result;
-};
-
-const getuserFromDB = async (): Promise<Iuser[]> => {
-  const result = await prisma.user.findMany({
-    select: {
-      id: true,
-      name: true,
-      email: true,
-      role: true,
-      contactNo: true,
-      address: true,
-      profileImg: true,
-      createdAt: true,
-      updatedAt: true,
-      reviews: true,
-      orders: true,
-    },
-  });
-  return result;
-};
-
-const sigleuser = async (id: string): Promise<Iuser | null> => {
-  const result = await prisma.user.findUnique({
-    where: {
-      id: id,
-    },
-    select: {
-      id: true,
-      name: true,
-      email: true,
-      role: true,
-      contactNo: true,
-      address: true,
-      profileImg: true,
-      createdAt: true,
-      updatedAt: true,
-      reviews: true,
-      orders: true,
-    },
-  });
-
-  return result;
-};
-
-const userupdate = async (id: string, data: User): Promise<User> => {
-  const result = await prisma.user.update({
-    where: {
-      id: id,
-    },
+const insertprofike = async (id: any): Promise<profiledetails | null> => {
+  const data: profiledetails = {} as profiledetails;
+  data.userId = id;
+  data.address = ' ';
+  data.phonenumber = ' ';
+  data.profileimg =
+    'https://cdn.icon-icons.com/icons2/2506/PNG/512/user_icon_150670.png';
+  const result = await prisma.profiledetails.create({
     data,
   });
   return result;
 };
-const userdelete = async (id: string): Promise<User> => {
-  const orders = await prisma.order.findMany({
+
+const getprofile = async (id: any): Promise<profiledetails | null | any> => {
+  const result = await prisma.profiledetails.findUnique({
     where: {
       userId: id,
     },
+    include: {
+      user: true,
+    },
   });
+  const data = {
+    name: result?.user?.name,
+    email: result?.user?.email,
+    address: result?.address,
+    phonenumber: result?.phonenumber,
+    profileimg: result?.profileimg,
+    role: result?.user?.role,
+  };
+  return data;
+};
 
-  await Promise.all(
-    orders.map(async order => {
-      await prisma.orderedBooks.deleteMany({
-        where: {
-          orderId: order.id,
-        },
-      });
-    })
-  );
-
-  await Promise.all(
-    orders.map(async order => {
-      await prisma.order.delete({
-        where: {
-          id: order.id,
-        },
-      });
-    })
-  );
-
-  const result = await prisma.user.delete({
+const updateprofile = async (
+  data: any,
+  id: any
+): Promise<profiledetails | null | any> => {
+  await prisma.user.update({
     where: {
       id: id,
     },
+    data: {
+      name: data.name,
+    },
+  });
+  const result = await prisma.profiledetails.update({
+    where: {
+      userId: id,
+    },
+    include: {
+      user: true,
+    },
+    data,
   });
   return result;
 };
 
-const profile = async (id: string): Promise<Iuser | null> => {
+const getfulluser = async (id: any): Promise<profiledetails | null | any> => {
   const result = await prisma.user.findUnique({
     where: {
       id: id,
     },
-    select: {
-      id: true,
-      name: true,
-      email: true,
-      role: true,
-      contactNo: true,
-      address: true,
-      profileImg: true,
-      createdAt: true,
-      updatedAt: true,
-      reviews: true,
-      orders: true,
+    include: {
+      review: true,
+      booking: true,
+      cart: true,
+      feedback: true,
+      notification: true,
     },
   });
   return result;
 };
 
-export const userservice = {
-  insertIntoDB,
-  getuserFromDB,
-  sigleuser,
-  userupdate,
-  userdelete,
-  profile,
+export const profileService = {
+  insertprofike,
+  getprofile,
+  updateprofile,
+  getfulluser,
 };

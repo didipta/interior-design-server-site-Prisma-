@@ -8,6 +8,7 @@ import ApiError from '../../../errors/ApiError';
 import { jwtHelpers } from '../../../helpers/jwtHelpers';
 import prisma from '../../../shared/prisma';
 import { IAuth, ILoginUser, ILoginUserResponse } from './auth.interface';
+import { profileService } from '../user/user.service';
 
 const signup = async (data: User): Promise<IAuth> => {
   const emailexit = await prisma.user.findUnique({
@@ -27,7 +28,7 @@ const signup = async (data: User): Promise<IAuth> => {
     Number(config.bcrypt_salt as string)
   );
   data.password = passwordHash;
-  data.defaultpassword="1";
+  data.defaultpassword = '1';
 
   const result = await prisma.user.create({
     data: {
@@ -43,10 +44,12 @@ const signup = async (data: User): Promise<IAuth> => {
       updatedAt: true,
     },
   });
+
+  await profileService.insertprofike(result.id);
   return result;
 };
 
-const loginAdmin = async (payload: ILoginUser): Promise<ILoginUserResponse> => {
+const login = async (payload: ILoginUser): Promise<ILoginUserResponse> => {
   const { email, password } = payload;
 
   const isuserExist = await prisma.user.findUnique({
@@ -59,7 +62,6 @@ const loginAdmin = async (payload: ILoginUser): Promise<ILoginUserResponse> => {
     throw new ApiError(httpStatus.NOT_FOUND, 'User does not exist');
   }
   const isPasswordMatch = await bcrypt.compare(password, isuserExist.password);
-
 
   if (!isPasswordMatch) {
     throw new ApiError(httpStatus.UNAUTHORIZED, 'Password is incorrect');
@@ -82,10 +84,12 @@ const loginAdmin = async (payload: ILoginUser): Promise<ILoginUserResponse> => {
 
   return {
     accessToken,
+    isuserExist,
   };
 };
 
+
 export const authService = {
   signup,
-  loginAdmin,
+  login,
 };

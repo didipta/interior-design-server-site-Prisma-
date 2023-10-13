@@ -1,12 +1,11 @@
 import express from 'express';
-import auth from '../../middlewares/auth';
-import { ENUM_USER_ROLE } from './../../../enums/user';
-import { usercontroller } from './user.controller';
+import { profileController } from './user.controller';
+
 const router = express.Router();
 
-router.get('/', auth(ENUM_USER_ROLE.admin), usercontroller.getuserFromDB);
-router.get('/:id', auth(ENUM_USER_ROLE.admin), usercontroller.sigleuser);
-router.patch('/:id', auth(ENUM_USER_ROLE.admin), usercontroller.userupdate);
-router.delete('/:id', auth(ENUM_USER_ROLE.admin), usercontroller.userdelete);
+router.post('/', profileController.insertprofile);
+router.get('/profile', profileController.getprofile);
+router.put('/', profileController.updateprofile);
+router.get('/userdetails', profileController.singleuseralldetails);
 
-export const userRoutes = router;
+export const userRoute = router;

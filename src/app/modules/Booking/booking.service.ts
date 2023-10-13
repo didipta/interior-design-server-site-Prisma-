@@ -1,23 +1,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { booking } from '@prisma/client';
 import prisma from '../../../shared/prisma';
+import { notificationService } from '../notification/notification.service';
 
 const createbooking = async (
   data: booking,
   id: any
 ): Promise<booking | null> => {
   data.userId = id;
-  data.bookingtime = 'null';
+  data.bookingdate = new Date(data.bookingdate);
   const result = await prisma.booking.create({
     data,
   });
   if (result) {
-    await prisma.notification.create({
-      data: {
-        type: 'booking',
-        notification: 'You have a new booking',
-        userId: id,
-      },
+    notificationService.notificationcreate({
+      type: 'booking',
+      title: 'New Booking',
+      notification: 'Received your booking',
+      userId: id,
     });
   }
   return result;
