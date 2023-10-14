@@ -1,5 +1,6 @@
 import { feedback } from '@prisma/client';
 import prisma from '../../../shared/prisma';
+import { notificationService } from '../notification/notification.service';
 
 const insertfeedback = async (
   data: feedback,
@@ -8,7 +9,18 @@ const insertfeedback = async (
   data.userId = id;
   const result = await prisma.feedback.create({
     data,
+    include: {
+      user: true,
+    },
   });
+  if (result) {
+    notificationService.notificationcreate({
+      type: 'feedback',
+      title: `Your feedback is ${result.subject}`,
+      notification: 'feedback added successfully',
+      userId: id,
+    });
+  }
 
   return result;
 };

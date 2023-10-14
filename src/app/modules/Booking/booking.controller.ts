@@ -25,6 +25,31 @@ const createbooking = catchAsync(async (req, res) => {
   });
 });
 
+const allbooking = catchAsync(async (req, res) => {
+  const result = await bookingService.allbooking();
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'booking fetched successfully',
+    data: result,
+  });
+});
+
+const bookingstatuschange = catchAsync(async (req, res) => {
+  const result = await bookingService.bookingstatuschange(
+    req.params.id,
+    req.body.status
+  );
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'booking status changed successfully',
+    data: result,
+  });
+});
+
 export const bookingController = {
   createbooking,
+  allbooking,
+  bookingstatuschange,
 };

@@ -7,3 +7,8 @@ export const booking = z.object({
     bookingdate: z.string({ required_error: 'Booking Date is required' }),
   }),
 });
+export const bookingstatus = z.object({
+  body: z.object({
+    status: z.enum(['pedding', 'accepted', 'rejected']),
+  }),
+});

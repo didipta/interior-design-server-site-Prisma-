@@ -59,6 +59,11 @@
             "date": 1697169601959,
             "name": "D:\\programming hero level-2\\Interior Design and Decor Service\\interior design server site(Prisma)\\logs\\winston\\errors\\phu-2023-13-10-10-error.log",
             "hash": "80a59ef6321025599f7a0176bd168b7f3b9a9e8c037b8f616d1ce68fe2d2e0e1"
+        },
+        {
+            "date": 1697257889589,
+            "name": "D:\\programming hero level-2\\Interior Design and Decor Service\\interior design server site(Prisma)\\logs\\winston\\errors\\phu-2023-14-10-10-error.log",
+            "hash": "d047024dcb4a9008eb424745d0c3ef01ceee2993cb588ee1bfdf5312c39ed738"
         }
     ],
     "hashType": "sha256"
