@@ -33,6 +33,22 @@ const getcategorybyid = catchAsync(async (req, res) => {
   });
 });
 
+const getallnamelist = catchAsync(async (req, res) => {
+  const result = await servicecategoryService.getcategory();
+  const name = result.map(item => {
+    return {
+      id: item.id,
+      categoryname: item.categoryname,
+    };
+  });
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'service category fetched successfully',
+    data: name,
+  });
+});
+
 const updatecategory = catchAsync(async (req, res) => {
   const result = await servicecategoryService.updatecategory(
     req.params.id,
@@ -62,4 +78,5 @@ export const servicecategoryController = {
   getcategorybyid,
   updatecategory,
   deleteservicecate,
+  getallnamelist,
 };

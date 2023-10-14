@@ -13,6 +13,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.servicecategoryService = void 0;
+const http_status_1 = __importDefault(require("http-status"));
+const ApiError_1 = __importDefault(require("../../../errors/ApiError"));
 const prisma_1 = __importDefault(require("../../../shared/prisma"));
 const createservicecate = (data) => __awaiter(void 0, void 0, void 0, function* () {
     const servicecate = yield prisma_1.default.servicecategory.findFirst({
@@ -21,7 +23,7 @@ const createservicecate = (data) => __awaiter(void 0, void 0, void 0, function* 
         },
     });
     if (servicecate) {
-        throw new Error('service category already exists');
+        throw new ApiError_1.default(http_status_1.default.BAD_REQUEST, 'service category already exists');
     }
     const result = yield prisma_1.default.servicecategory.create({
         data,

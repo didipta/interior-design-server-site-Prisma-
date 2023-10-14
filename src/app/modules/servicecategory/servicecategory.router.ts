@@ -14,4 +14,5 @@ router.get('/', servicecategoryController.getcategory);
 router.get('/:id', servicecategoryController.getcategorybyid);
 router.put('/:id', servicecategoryController.updatecategory);
 router.delete('/:id', servicecategoryController.deleteservicecate);
+router.get('/namelist/list', servicecategoryController.getallnamelist);
 export const servicecategoryRoute = router;

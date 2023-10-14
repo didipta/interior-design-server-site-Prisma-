@@ -1,4 +1,6 @@
 import { servicecategory } from '@prisma/client';
+import httpStatus from 'http-status';
+import ApiError from '../../../errors/ApiError';
 import prisma from '../../../shared/prisma';
 
 const createservicecate = async (
@@ -10,7 +12,10 @@ const createservicecate = async (
     },
   });
   if (servicecate) {
-    throw new Error('service category already exists');
+    throw new ApiError(
+      httpStatus.BAD_REQUEST,
+      'service category already exists'
+    );
   }
   const result = await prisma.servicecategory.create({
     data,
