@@ -9,13 +9,9 @@ export const service = z.object({
       message: 'Image is required',
     }),
 
-    price: z.number({ required_error: 'Price is required' }).min(1, {
+    price: z.string({ required_error: 'Price is required' }).min(1, {
       message: 'Price is required',
     }),
-    Available: z.number({ required_error: 'Available is required' }).min(1, {
-      message: 'Available is required',
-    }),
-    status: z.number({ required_error: 'Status is required' }),
     slug: z.string({ required_error: 'Slug is required' }).min(1, {
       message: 'Slug is required',
     }),

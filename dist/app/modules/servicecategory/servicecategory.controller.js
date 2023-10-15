@@ -44,6 +44,21 @@ const getcategorybyid = (0, catchAsync_1.default)((req, res) => __awaiter(void 0
         data: result,
     });
 }));
+const getallnamelist = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield servicecategory_service_1.servicecategoryService.getcategory();
+    const name = result.map(item => {
+        return {
+            id: item.id,
+            categoryname: item.categoryname,
+        };
+    });
+    (0, sendResponse_1.default)(res, {
+        statusCode: http_status_1.default.OK,
+        success: true,
+        message: 'service category fetched successfully',
+        data: name,
+    });
+}));
 const updatecategory = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield servicecategory_service_1.servicecategoryService.updatecategory(req.params.id, req.body);
     (0, sendResponse_1.default)(res, {
@@ -68,4 +83,5 @@ exports.servicecategoryController = {
     getcategorybyid,
     updatecategory,
     deleteservicecate,
+    getallnamelist,
 };

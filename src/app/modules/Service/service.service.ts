@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Prisma, service } from '@prisma/client';
+import httpStatus from 'http-status';
+import ApiError from '../../../errors/ApiError';
 import { paginationHelpers } from '../../../helpers/paginationHelper';
 import { IGenericResponse } from '../../../interfaces/common';
 import { IPaginationOptions } from '../../../interfaces/pagination';
@@ -13,8 +15,11 @@ const createservice = async (data: service): Promise<service> => {
     },
   });
   if (service) {
-    throw new Error('service already exists');
+    throw new ApiError(httpStatus.BAD_REQUEST, 'service already exists');
   }
+  data.price = parseFloat(data.price.toString());
+  data.Available = 1;
+  data.status = 1;
   const result = await prisma.service.create({
     data,
   });
@@ -79,6 +84,8 @@ const getservice = async (
     include: {
       servicecategory: true,
       review: true,
+      booking: true,
+      cart: true,
     },
     where: whereConditions,
     skip,
@@ -108,9 +115,27 @@ const getservicebyid = async (id: string): Promise<service | null> => {
     where: {
       id: id,
     },
+    include: {
+      servicecategory: true,
+      review: {
+        include: {
+          user: {
+            select: {
+              name: true,
+              profile: {
+                select: {
+                  profileimg: true,
+                },
+              },
+            },
+          },
+        },
+      },
+    },
   });
   return result;
 };
+
 const updateservice = async (
   id: string,
   data: service

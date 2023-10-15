@@ -10,13 +10,9 @@ exports.service = zod_1.z.object({
         img: zod_1.z.string({ required_error: 'Image is required' }).min(1, {
             message: 'Image is required',
         }),
-        price: zod_1.z.number({ required_error: 'Price is required' }).min(1, {
+        price: zod_1.z.string({ required_error: 'Price is required' }).min(1, {
             message: 'Price is required',
         }),
-        Available: zod_1.z.number({ required_error: 'Available is required' }).min(1, {
-            message: 'Available is required',
-        }),
-        status: zod_1.z.number({ required_error: 'Status is required' }),
         slug: zod_1.z.string({ required_error: 'Slug is required' }).min(1, {
             message: 'Slug is required',
         }),

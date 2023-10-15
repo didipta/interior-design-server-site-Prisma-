@@ -43,9 +43,6 @@ const getcategorybyid = (id) => __awaiter(void 0, void 0, void 0, function* () {
         where: {
             id: id,
         },
-        include: {
-            service: true,
-        },
     });
     return result;
 });

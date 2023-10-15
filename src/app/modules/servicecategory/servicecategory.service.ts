@@ -38,9 +38,6 @@ const getcategorybyid = async (id: string): Promise<servicecategory | null> => {
     where: {
       id: id,
     },
-    include: {
-      service: true,
-    },
   });
   return result;
 };

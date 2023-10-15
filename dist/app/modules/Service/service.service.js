@@ -24,6 +24,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.serviceService = void 0;
+const http_status_1 = __importDefault(require("http-status"));
+const ApiError_1 = __importDefault(require("../../../errors/ApiError"));
 const paginationHelper_1 = require("../../../helpers/paginationHelper");
 const prisma_1 = __importDefault(require("../../../shared/prisma"));
 const service_interface_1 = require("./service.interface");
@@ -34,8 +36,11 @@ const createservice = (data) => __awaiter(void 0, void 0, void 0, function* () {
         },
     });
     if (service) {
-        throw new Error('service already exists');
+        throw new ApiError_1.default(http_status_1.default.BAD_REQUEST, 'service already exists');
     }
+    data.price = parseFloat(data.price.toString());
+    data.Available = 1;
+    data.status = 1;
     const result = yield prisma_1.default.service.create({
         data,
     });
@@ -94,6 +99,8 @@ const getservice = (filter, options) => __awaiter(void 0, void 0, void 0, functi
         include: {
             servicecategory: true,
             review: true,
+            booking: true,
+            cart: true,
         },
         where: whereConditions,
         skip,
@@ -120,6 +127,23 @@ const getservicebyid = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield prisma_1.default.service.findUnique({
         where: {
             id: id,
+        },
+        include: {
+            servicecategory: true,
+            review: {
+                include: {
+                    user: {
+                        select: {
+                            name: true,
+                            profile: {
+                                select: {
+                                    profileimg: true,
+                                },
+                            },
+                        },
+                    },
+                },
+            },
         },
     });
     return result;
