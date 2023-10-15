@@ -149,6 +149,22 @@ const updateservice = async (
   return result;
 };
 const deleteservice = async (id: string): Promise<service | null> => {
+  await prisma.review.deleteMany({
+    where: {
+      serviceId: id,
+    },
+  });
+  await prisma.cart.deleteMany({
+    where: {
+      serviceId: id,
+    },
+  });
+  await prisma.booking.deleteMany({
+    where: {
+      serviceId: id,
+    },
+  });
+
   const result = await prisma.service.delete({
     where: {
       id: id,
