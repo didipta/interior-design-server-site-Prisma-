@@ -173,10 +173,22 @@ const deleteservice = async (id: string): Promise<service | null> => {
   return result;
 };
 
+const topfiveservice = async (): Promise<service[]> => {
+  const result = await prisma.service.findMany({
+    take: 5,
+    orderBy: {
+      id: 'desc',
+    },
+  });
+  return result;
+}
+
+
 export const serviceService = {
   createservice,
   getservice,
   getservicebyid,
   updateservice,
   deleteservice,
+  topfiveservice
 };

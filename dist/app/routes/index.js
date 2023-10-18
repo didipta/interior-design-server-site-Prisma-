@@ -9,6 +9,7 @@ const booking_router_1 = require("../modules/Booking/booking.router");
 const service_router_1 = require("../modules/Service/service.router");
 const cart_router_1 = require("../modules/cart/cart.router");
 const content_router_1 = require("../modules/content/content.router");
+const home_router_1 = require("../modules/home/home.router");
 const notification_router_1 = require("../modules/notification/notification.router");
 const review_router_1 = require("../modules/review/review.router");
 const servicecategory_router_1 = require("../modules/servicecategory/servicecategory.router");
@@ -50,6 +51,10 @@ const moduleRoutes = [
     {
         path: '/content',
         route: content_router_1.contentRoute,
+    },
+    {
+        path: '/home',
+        route: home_router_1.homeRoute,
     },
 ];
 moduleRoutes.forEach(route => router.use(route.path, route.route));

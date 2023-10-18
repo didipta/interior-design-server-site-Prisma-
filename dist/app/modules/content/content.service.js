@@ -30,8 +30,33 @@ const deletecontent = (id) => __awaiter(void 0, void 0, void 0, function* () {
         },
     });
 });
+const fivetypewish = () => __awaiter(void 0, void 0, void 0, function* () {
+    const faq = yield prisma_1.default.content.findMany({
+        where: {
+            type: 'faq',
+        },
+        take: 5,
+        orderBy: {
+            id: 'desc',
+        },
+    });
+    const blog = yield prisma_1.default.content.findMany({
+        where: {
+            type: 'blog',
+        },
+        take: 5,
+        orderBy: {
+            id: 'desc',
+        },
+    });
+    return {
+        faq: faq,
+        blog: blog,
+    };
+});
 exports.contentService = {
     insertcontent,
     getcontent,
     deletecontent,
+    fivetypewish,
 };

@@ -39,6 +39,18 @@ const getcart = (id) => __awaiter(void 0, void 0, void 0, function* () {
         where: {
             userId: id,
         },
+        include: {
+            service: {
+                select: {
+                    name: true,
+                    price: true,
+                    img: true,
+                },
+            },
+        },
+        orderBy: {
+            createdAt: 'desc',
+        },
     });
 });
 const deletecart = (id) => __awaiter(void 0, void 0, void 0, function* () {

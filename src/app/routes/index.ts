@@ -4,6 +4,7 @@ import { bookingRoute } from '../modules/Booking/booking.router';
 import { serviceRoute } from '../modules/Service/service.router';
 import { cartRoute } from '../modules/cart/cart.router';
 import { contentRoute } from '../modules/content/content.router';
+import { homeRoute } from '../modules/home/home.router';
 import { notificationRoute } from '../modules/notification/notification.router';
 import { reviewRouter } from '../modules/review/review.router';
 import { servicecategoryRoute } from '../modules/servicecategory/servicecategory.router';
@@ -47,6 +48,10 @@ const moduleRoutes = [
   {
     path: '/content',
     route: contentRoute,
+  },
+  {
+    path: '/home',
+    route: homeRoute,
   },
 ];
 

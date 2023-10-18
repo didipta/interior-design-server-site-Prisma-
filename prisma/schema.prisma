@@ -35,7 +35,7 @@ model profiledetails {
   id         String   @id @default(uuid())
   profileimg String
   address    String
-   phonenumber String  @unique
+   phonenumber String  
   user  User @relation(fields: [userId], references: [id])
   userId String  @unique
    createdAt  DateTime @default(now())

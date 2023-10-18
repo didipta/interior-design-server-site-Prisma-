@@ -18,6 +18,9 @@ const notificationget = async (id: any) => {
     where: {
       userId: id,
     },
+    orderBy: {
+      createdAt: 'desc',
+    },
   });
   const length = await prisma.notification.count({
     where: {

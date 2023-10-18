@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { content } from '@prisma/client';
 import prisma from '../../../shared/prisma';
 
@@ -19,9 +20,34 @@ const deletecontent = async (id: string): Promise<content> => {
     },
   });
 };
+const fivetypewish = async (): Promise<any> => {
+  const faq = await prisma.content.findMany({
+    where: {
+      type: 'faq',
+    },
+    take: 5,
+    orderBy: {
+      id: 'desc',
+    },
+  });
+  const blog = await prisma.content.findMany({
+    where: {
+      type: 'blog',
+    },
+    take: 5,
+    orderBy: {
+      id: 'desc',
+    },
+  });
+  return {
+    faq: faq,
+    blog: blog,
+  };
+};
 
 export const contentService = {
   insertcontent,
   getcontent,
   deletecontent,
+  fivetypewish,
 };

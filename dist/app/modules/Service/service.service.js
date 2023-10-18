@@ -158,9 +158,33 @@ const updateservice = (id, data) => __awaiter(void 0, void 0, void 0, function* 
     return result;
 });
 const deleteservice = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    yield prisma_1.default.review.deleteMany({
+        where: {
+            serviceId: id,
+        },
+    });
+    yield prisma_1.default.cart.deleteMany({
+        where: {
+            serviceId: id,
+        },
+    });
+    yield prisma_1.default.booking.deleteMany({
+        where: {
+            serviceId: id,
+        },
+    });
     const result = yield prisma_1.default.service.delete({
         where: {
             id: id,
+        },
+    });
+    return result;
+});
+const topfiveservice = () => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield prisma_1.default.service.findMany({
+        take: 5,
+        orderBy: {
+            id: 'desc',
         },
     });
     return result;
@@ -171,4 +195,5 @@ exports.serviceService = {
     getservicebyid,
     updateservice,
     deleteservice,
+    topfiveservice
 };

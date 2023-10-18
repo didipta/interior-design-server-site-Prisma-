@@ -28,6 +28,18 @@ const getcart = async (id: string): Promise<cart[]> => {
     where: {
       userId: id,
     },
+    include: {
+      service: {
+        select: {
+          name: true,
+          price: true,
+          img: true,
+        },
+      },
+    },
+    orderBy: {
+      createdAt: 'desc',
+    },
   });
 };
 

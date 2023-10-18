@@ -31,6 +31,9 @@ const notificationget = (id) => __awaiter(void 0, void 0, void 0, function* () {
         where: {
             userId: id,
         },
+        orderBy: {
+            createdAt: 'desc',
+        },
     });
     const length = yield prisma_1.default.notification.count({
         where: {
