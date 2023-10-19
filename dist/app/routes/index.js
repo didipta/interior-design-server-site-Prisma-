@@ -14,6 +14,7 @@ const notification_router_1 = require("../modules/notification/notification.rout
 const review_router_1 = require("../modules/review/review.router");
 const servicecategory_router_1 = require("../modules/servicecategory/servicecategory.router");
 const user_routes_1 = require("../modules/user/user.routes");
+const feedback_router_1 = require("../modules/feedback/feedback.router");
 const router = express_1.default.Router();
 const moduleRoutes = [
     {
@@ -56,6 +57,10 @@ const moduleRoutes = [
         path: '/home',
         route: home_router_1.homeRoute,
     },
+    {
+        path: "/feedback",
+        route: feedback_router_1.feedbackRoute,
+    }
 ];
 moduleRoutes.forEach(route => router.use(route.path, route.route));
 exports.default = router;
