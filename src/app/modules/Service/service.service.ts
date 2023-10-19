@@ -117,6 +117,7 @@ const getservicebyid = async (id: string): Promise<service | null> => {
     },
     include: {
       servicecategory: true,
+      booking: true,
       review: {
         include: {
           user: {
@@ -181,8 +182,7 @@ const topfiveservice = async (): Promise<service[]> => {
     },
   });
   return result;
-}
-
+};
 
 export const serviceService = {
   createservice,
@@ -190,5 +190,5 @@ export const serviceService = {
   getservicebyid,
   updateservice,
   deleteservice,
-  topfiveservice
+  topfiveservice,
 };

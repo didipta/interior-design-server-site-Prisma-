@@ -13,11 +13,9 @@ export const reviewslice = z.object({
       })
       .nonempty(),
     rating: z
-      .number({
+      .string({
         required_error: 'rating is required',
       })
-      .int()
-      .min(1)
-      .max(5),
+      .nonempty(),
   }),
 });

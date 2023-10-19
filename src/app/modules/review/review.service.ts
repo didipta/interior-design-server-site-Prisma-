@@ -5,6 +5,7 @@ import { notificationService } from '../notification/notification.service';
 
 const insertreview = async (data: review, id: any): Promise<review> => {
   data.userId = id;
+  data.rating = Number(data.rating);
   const review = await prisma.review.create({
     data: data,
   });
