@@ -9,6 +9,7 @@ import { notificationRoute } from '../modules/notification/notification.router';
 import { reviewRouter } from '../modules/review/review.router';
 import { servicecategoryRoute } from '../modules/servicecategory/servicecategory.router';
 import { userRoute } from '../modules/user/user.routes';
+import { feedbackRoute } from '../modules/feedback/feedback.router';
 
 const router = express.Router();
 
@@ -53,6 +54,10 @@ const moduleRoutes = [
     path: '/home',
     route: homeRoute,
   },
+  {
+    path:"/feedback",
+    route:feedbackRoute,
+  }
 ];
 
 moduleRoutes.forEach(route => router.use(route.path, route.route));

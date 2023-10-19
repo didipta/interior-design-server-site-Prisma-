@@ -17,6 +17,7 @@ const prisma_1 = __importDefault(require("../../../shared/prisma"));
 const notification_service_1 = require("../notification/notification.service");
 const insertreview = (data, id) => __awaiter(void 0, void 0, void 0, function* () {
     data.userId = id;
+    data.rating = Number(data.rating);
     const review = yield prisma_1.default.review.create({
         data: data,
     });

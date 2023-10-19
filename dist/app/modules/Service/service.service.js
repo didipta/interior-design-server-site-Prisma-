@@ -130,6 +130,7 @@ const getservicebyid = (id) => __awaiter(void 0, void 0, void 0, function* () {
         },
         include: {
             servicecategory: true,
+            booking: true,
             review: {
                 include: {
                     user: {
@@ -195,5 +196,5 @@ exports.serviceService = {
     getservicebyid,
     updateservice,
     deleteservice,
-    topfiveservice
+    topfiveservice,
 };
